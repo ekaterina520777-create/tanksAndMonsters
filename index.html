@@ -10,7 +10,7 @@
 
     <header class="header">
         <div class="header__logo">
-            <h1>Retro Tanks 2D</h1>
+            <h1>Танчики</h1>
         </div>
         <div class="header__controls">
             <button id="themeToggle" class="btn btn--secondary">Сменить тему</button>
@@ -30,11 +30,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="speedSelect" class="form-label">Скорость движения танков:</label>
+                    <label for="speedSelect" class="form-label">Скорость танков:</label>
                     <select id="speedSelect" class="input-field">
-                        <option value="2">Медленная (Тяжелые танки)</option>
-                        <option value="3" selected>Стандартная (Средние танки)</option>
+                        <option value="2">Медленная (Тяжелая броня)</option>
+                        <option value="3" selected>Стандартная (Средний бой)</option>
                         <option value="5">Турбо (Легкие танки)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="difficultySelect" class="form-label">Сложность турелей:</label>
+                    <select id="difficultySelect" class="input-field">
+                        <option value="10">Легко (10 урона за выстрел)</option>
+                        <option value="25" selected>Нормально (25 урона за выстрел)</option>
+                        <option value="50">Кошмар (50 урона за выстрел)</option>
                     </select>
                 </div>
 
