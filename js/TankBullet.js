@@ -8,6 +8,8 @@ export class TankBullet {
         this.speed = 6;
         this.color = color;
         this.active = true;
+        this.damage = 100; 
+        this.isMonsterBullet = false;
     }
 
     update() {
@@ -24,7 +26,7 @@ export class TankBullet {
         let ctx = this.game.ctx;
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+        ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
         ctx.fill();
     }
 }
