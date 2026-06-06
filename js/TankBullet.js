@@ -8,7 +8,7 @@ export class TankBullet {
         this.speed = 6;
         this.color = color;
         this.active = true;
-        this.damage = 100; 
+        this.damage = 100;  
         this.isMonsterBullet = false;
     }
 
