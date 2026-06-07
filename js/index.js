@@ -81,22 +81,20 @@ let mapLoaderApp;
         touchButtons.forEach(btn => {
             const element = document.getElementById(btn.id);
             if (element) {
-                element.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
+                element.addEventListener('pointerdown', (e) => {
+                    element.setPointerCapture(e.pointerId);
                     game.keys[btn.key] = true;
                 });
-                element.addEventListener('touchend', (e) => {
-                    e.preventDefault();
+
+                element.addEventListener('pointerup', (e) => {
                     game.keys[btn.key] = false;
                 });
 
-                element.addEventListener('mousedown', (e) => {
-                    game.keys[btn.key] = true;
-                });
-                element.addEventListener('mouseup', (e) => {
+                element.addEventListener('pointercancel', (e) => {
                     game.keys[btn.key] = false;
                 });
-                element.addEventListener('mouseleave', (e) => {
+
+                element.addEventListener('pointerleave', (e) => {
                     game.keys[btn.key] = false;
                 });
             }
@@ -104,12 +102,10 @@ let mapLoaderApp;
 
         const pauseBtn = document.getElementById('btnPause');
         if (pauseBtn) {
-            pauseBtn.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                if (game.isRunning) game.togglePause();
-            });
-            pauseBtn.addEventListener('click', (e) => {
-                if (game.isRunning) game.togglePause();
+            pauseBtn.addEventListener('pointerdown', () => {
+                if (game.isRunning) {
+                    game.togglePause();
+                }
             });
         }
     }
