@@ -5,7 +5,8 @@ export class TankBullet {
         this.y = y;
         this.dx = dx;
         this.dy = dy;
-        this.speed = 6;
+
+        this.speed = game.keys === undefined ? 6 : (color === '#4CAF50' ? (game.p1.bulletSpeedMultiplier ? 12 : 6) : (game.p2.bulletSpeedMultiplier ? 12 : 6));
         this.color = color;
         this.active = true;
         this.damage = 100;  

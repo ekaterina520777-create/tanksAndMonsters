@@ -1,5 +1,6 @@
 import { Tank } from './Tank.js';
 import { Monster } from './Monster.js';
+import { Bonus } from './Bonus.js';
 
 export class Game {
     constructor(canvasId, leaderboardApp) {
@@ -12,6 +13,7 @@ export class Game {
         this.keys = {};
         this.bullets = [];
         this.monsters = [];
+        this.bonuses = [];
         this.isPaused = false;
         this.tankSpeed = 3;
         this.isRunning = false;
@@ -41,6 +43,7 @@ export class Game {
         this.map = mapGrid;
         this.tankSpeed = parseInt(selectedSpeed);
         this.bullets = [];
+        this.bonuses = [];
         this.isPaused = false;
         document.getElementById('pauseOverlay').classList.add('hidden');
 
@@ -88,6 +91,13 @@ export class Game {
                bullet.y > monster.y && bullet.y < monster.y + monster.size;
     }
 
+    checkBonusCollision(tank, bonus) {
+        return tank.x < bonus.x + bonus.size &&
+               tank.x + tank.size > bonus.x &&
+               tank.y < bonus.y + bonus.size &&
+               tank.y + tank.size > bonus.y;
+    }
+
     update() {
         if (!this.isRunning || this.isPaused) return;
 
@@ -104,14 +114,17 @@ export class Game {
             let b = this.bullets[i];
             b.update();
 
-            // Проверка: попала ли пуля игрока в монстра
             if (!b.isMonsterBullet) {
                 for (let m = this.monsters.length - 1; m >= 0; m--) {
                     let monster = this.monsters[m];
                     if (this.hitMonster(b, monster)) {
                         monster.hp -= b.damage;
                         b.active = false;
+                        
                         if (monster.hp <= 0) {
+                            const bonusType = Math.random() < 0.5 ? 'life' : 'speed';
+                            this.bonuses.push(new Bonus(this, monster.x, monster.y, bonusType));
+                            
                             this.monsters.splice(m, 1);
                         }
                         break;
@@ -154,6 +167,29 @@ export class Game {
             }
         }
 
+        for (let i = this.bonuses.length - 1; i >= 0; i--) {
+            let bonus = this.bonuses[i];
+
+            if (this.checkBonusCollision(this.p1, bonus)) {
+                if (bonus.type === 'life') {
+                    this.p1.lives++;
+                } else if (bonus.type === 'speed') {
+                    this.p1.bulletSpeedMultiplier = 2.0; 
+                }
+                this.bonuses.splice(i, 1);
+                continue;
+            }
+
+            if (this.checkBonusCollision(this.p2, bonus)) {
+                if (bonus.type === 'life') {
+                    this.p2.lives++;
+                } else if (bonus.type === 'speed') {
+                    this.p2.bulletSpeedMultiplier = 2.0;
+                }
+                this.bonuses.splice(i, 1);
+            }
+        }
+
         if (winnerMessage) {
             this.isRunning = false;
             alert(winnerMessage);
@@ -161,7 +197,7 @@ export class Game {
         }
     }
 
-    render() {
+   render() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         if (!this.isRunning) {
@@ -180,6 +216,10 @@ export class Game {
             }
         }
 
+        for (let bonus of this.bonuses) {
+            bonus.draw();
+        }
+
         for (let monster of this.monsters) monster.draw();
         this.p1.draw();
         this.p2.draw();
@@ -187,11 +227,11 @@ export class Game {
 
         this.ctx.fillStyle = '#4CAF50';
         this.ctx.font = 'bold 16px monospace';
-        this.ctx.fillText('P1: ' + '♥'.repeat(this.p1.lives) + ' (' + this.p1.hp + '%)', 15, 25);
+        this.ctx.fillText('P1: ' + '♥'.repeat(this.p1.lives) + ' (' + this.p1.hp + '%)', 30, 25);
 
         this.ctx.fillStyle = '#2196F3';
         this.ctx.font = 'bold 16px monospace';
-        this.ctx.fillText('P2: ' + '♥'.repeat(this.p2.lives) + ' (' + this.p2.hp + '%)', this.canvas.width - 175, 25);
+        this.ctx.fillText('P2: ' + '♥'.repeat(this.p2.lives) + ' (' + this.p2.hp + '%)', this.canvas.width - 210, 25);
     }
 
     loop() {
