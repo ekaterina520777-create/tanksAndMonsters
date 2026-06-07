@@ -39,10 +39,11 @@ let mapLoaderApp;
             const mapGrid = mapLoaderApp.getSelectedMapGrid();
             const speed = document.getElementById('speedSelect').value;
             const monsterDamage = document.getElementById('difficultySelect').value;
+            const lives = document.getElementById('livesSelect').value;
 
-            game.setupLevel(mapGrid, speed, monsterDamage);
+            game.setupLevel(mapGrid, speed, monsterDamage, lives);
 
-        
+    
         });
     }
 
