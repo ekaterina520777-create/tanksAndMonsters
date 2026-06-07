@@ -11,7 +11,6 @@ let mapLoaderApp;
     window.addEventListener('load', init);
 
     function init() {
-    
         leaderboardApp = new LeaderboardApp();
         game = new Game('gameCanvas', leaderboardApp);
         mapLoaderApp = new MapLoaderApp();
@@ -19,10 +18,17 @@ let mapLoaderApp;
         initFormController();
         initThemeSelector();
 
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') {
+                    e.preventDefault();
+                }
+            }
+        });
+
         game.loop();
         mapLoaderApp.fetchMaps();
     }
-
 
     function initFormController() {
         const form = document.getElementById('gameSettingsForm');
@@ -35,6 +41,8 @@ let mapLoaderApp;
             const monsterDamage = document.getElementById('difficultySelect').value;
 
             game.setupLevel(mapGrid, speed, monsterDamage);
+
+        
         });
     }
 
@@ -43,7 +51,6 @@ let mapLoaderApp;
         
         if (!toggleBtn) return;
 
-        // Проверяем старый выбор пользователя в localStorage
         if (localStorage.getItem('theme') === 'light') {
             document.body.classList.add('light-theme');
         }
