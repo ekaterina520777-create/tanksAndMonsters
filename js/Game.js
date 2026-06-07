@@ -83,6 +83,11 @@ export class Game {
                bullet.y > tank.y && bullet.y < tank.y + tank.size;
     }
 
+    hitMonster(bullet, monster) {
+        return bullet.x > monster.x && bullet.x < monster.x + monster.size &&
+               bullet.y > monster.y && bullet.y < monster.y + monster.size;
+    }
+
     update() {
         if (!this.isRunning || this.isPaused) return;
 
@@ -98,6 +103,21 @@ export class Game {
         for (let i = this.bullets.length - 1; i >= 0; i--) {
             let b = this.bullets[i];
             b.update();
+
+            // Проверка: попала ли пуля игрока в монстра
+            if (!b.isMonsterBullet) {
+                for (let m = this.monsters.length - 1; m >= 0; m--) {
+                    let monster = this.monsters[m];
+                    if (this.hitMonster(b, monster)) {
+                        monster.hp -= b.damage;
+                        b.active = false;
+                        if (monster.hp <= 0) {
+                            this.monsters.splice(m, 1);
+                        }
+                        break;
+                    }
+                }
+            }
 
             if (this.hitTank(b, this.p1) && b.color !== this.p1.color) {
                 this.p1.hp -= b.damage;
