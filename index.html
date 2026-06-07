@@ -21,14 +21,13 @@
 
     <main class="main-container container row mx-auto g-4 justify-content-center">
         
-        <section class="setup-section col-xl-3 col-lg-4 col-md-5 card p-4 border-0 bg-secondary-subtle shadow-sm rounded-3">
+        <section class="setup-section col-xl-3 col-lg-4 col-md-12 card p-4 border-0 bg-secondary-subtle shadow-sm rounded-3 order-2 order-lg-1">
             <h2 class="section-title h6 mb-3 fw-bold text-uppercase tracking-wider">Настройки игры</h2>
             <form id="gameSettingsForm" class="settings-form">
                 
                 <div class="form-group mb-3">
                     <label for="mapSelect" class="form-label small text-muted">Выберите карту:</label>
-                    <select id="mapSelect" class="input-field form-select form-select-sm bg-dark text-light border-secondary" required>
-                    </select>
+                    <select id="mapSelect" class="input-field form-select form-select-sm bg-dark text-light border-secondary" required></select>
                 </div>
 
                 <div class="form-group mb-3">
@@ -62,7 +61,7 @@
                 <button type="submit" class="btn btn-light w-100 fw-bold btn--start text-uppercase btn-sm shadow-sm py-2">Запустить бой</button>
             </form>
             
-            <div class="game-instructions mt-4 pt-3 border-top border-secondary-subtle">
+            <div class="game-instructions mt-4 pt-3 border-top border-secondary-subtle d-none d-md-block">
                 <h3 class="h6 mb-2 small fw-bold text-muted text-uppercase">Управление:</h3>
                 <p class="small mb-3 text-secondary"><b>Пауза:</b> Клавиша <kbd class="bg-dark text-light border border-secondary">P</kbd></p>
                 <div class="controls-grid d-flex flex-column gap-2 small text-secondary">
@@ -78,20 +77,51 @@
             </div>
         </section>
 
-        <section class="game-section col-xl-6 col-lg-8 col-md-7 d-flex justify-content-center align-items-start position-relative">
-            <div id="pauseOverlay" class="overlay hidden position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-75 text-warning fs-3 fw-bold rounded-3 tracking-widest">ПАУЗА</div>
-            
-            <canvas id="gameCanvas" width="600" height="440" class="img-fluid rounded-3 border border-secondary shadow-lg"></canvas>
+        <section class="game-section col-xl-6 col-lg-8 col-md-12 d-flex flex-column align-items-center position-relative order-1 order-lg-2">
+            <div class="canvas-wrapper position-relative w-100 d-flex justify-content-center">
+                <div id="pauseOverlay" class="overlay hidden position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-75 text-warning fs-3 fw-bold rounded-3 tracking-widest">ПАУЗА</div>
+                <canvas id="gameCanvas" width="600" height="440" class="img-fluid rounded-3 border border-secondary shadow-lg"></canvas>
+            </div>
+
+            <div id="mobileControls" class="mobile-controls w-100 mt-3 px-2">
+                <div class="d-flex justify-content-between align-items-center w-100 gap-2">
+                    
+                    <div class="d-flex flex-column align-items-center gap-2 p-2 border border-success rounded-3 bg-dark bg-opacity-25">
+                        <span class="small text-success fw-bold">P1 (Зелёный)</span>
+                        <div class="d-grid mobile-joystick">
+                            <button id="p1Up" class="btn btn-success btn-joystick btn-up">▲</button>
+                            <button id="p1Left" class="btn btn-success btn-joystick btn-left">◀</button>
+                            <button id="p1Shoot" class="btn btn-danger btn-joystick btn-shoot fw-bold">💥</button>
+                            <button id="p1Right" class="btn btn-success btn-joystick btn-right">▶</button>
+                            <button id="p1Down" class="btn btn-success btn-joystick btn-down">▼</button>
+                        </div>
+                    </div>
+                    
+                    <button id="btnPause" class="btn btn-sm btn-outline-warning rounded-circle p-2" style="width: 45px; height: 45px; min-width: 45px;">P</button>
+
+                    <div class="d-flex flex-column align-items-center gap-2 p-2 border border-info rounded-3 bg-dark bg-opacity-25">
+                        <span class="small text-info fw-bold">P2 (Синий)</span>
+                        <div class="d-grid mobile-joystick">
+                            <button id="p2Up" class="btn btn-info btn-joystick btn-up text-white">▲</button>
+                            <button id="p2Left" class="btn btn-info btn-joystick btn-left text-white">◀</button>
+                            <button id="p2Shoot" class="btn btn-danger btn-joystick btn-shoot fw-bold">💥</button>
+                            <button id="p2Right" class="btn btn-info btn-joystick btn-right text-white">▶</button>
+                            <button id="p2Down" class="btn btn-info btn-joystick btn-down text-white">▼</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </section>
 
-        <section class="leaderboard-section col-xl-3 col-lg-12 card p-4 border-0 bg-secondary-subtle shadow-sm rounded-3">
+        <section class="leaderboard-section col-xl-3 col-lg-12 col-md-12 card p-4 border-0 bg-secondary-subtle shadow-sm rounded-3 order-3">
             <h2 class="section-title h6 mb-3 fw-bold text-uppercase tracking-wider">История сражений</h2>
             
             <div class="leaderboard-controls mb-3">
                 <button id="clearLogBtn" class="btn btn-sm btn-outline-danger w-100 btn--danger">Очистить историю</button>
             </div>
 
-            <ul id="battleLog" class="log-list list-group list-group-flush overflow-auto small" style="max-height: 320px;">
+            <ul id="battleLog" class="log-list list-group list-group-flush overflow-auto small" style="max-height: 220px;">
             </ul>
         </section>
 

@@ -5,6 +5,9 @@
     height: auto;
 }
 
+.canvas-wrapper {
+    max-width: 100%;
+}
 
 .overlay {
     z-index: 5;
@@ -16,7 +19,6 @@
     display: none !important;
 }
 
-
 .log-list::-webkit-scrollbar {
     width: 4px;
 }
@@ -25,7 +27,6 @@
     border-radius: 2px;
 }
 
-
 .log-list li {
     background: transparent !important;
     padding: 8px 0 !important;
@@ -33,7 +34,6 @@
     font-family: monospace;
     color: #a0a0aa !important;
 }
-
 
 body.light-theme {
     background-color: #f4f5f6 !important;
@@ -74,4 +74,44 @@ body.light-theme kbd {
     background-color: #e4e4e7 !important;
     color: #18181b !important;
     border: 1px solid #d4d4d8 !important;
+}
+
+.mobile-controls {
+    display: none;
+}
+
+.mobile-joystick {
+    grid-template-areas: 
+        ".    up    ."
+        "left shoot right"
+        ".    down  .";
+    gap: 6px;
+    width: 138px;
+}
+
+.btn-joystick {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    user-select: none;
+    touch-action: manipulation;
+}
+
+.btn-up { grid-area: up; }
+.btn-left { grid-area: left; }
+.btn-right { grid-area: right; }
+.btn-down { grid-area: down; }
+.btn-shoot { grid-area: shoot; }
+
+@media (max-width: 991.98px) {
+    .mobile-controls {
+        display: block;
+    }
+    .main-container {
+        padding: 0 5px;
+    }
 }

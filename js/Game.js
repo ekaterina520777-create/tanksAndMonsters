@@ -197,7 +197,9 @@ export class Game {
         }
     }
 
-   render() {
+   render() {   
+        this.ctx.textAlign = 'left';
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         
         if (!this.isRunning) {
