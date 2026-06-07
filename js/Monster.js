@@ -9,7 +9,7 @@ export class Monster {
         this.color = '#FF5722';
         this.cooldown = 0;
         this.damage = damage;
-        this.hp = 300; // Здоровье монстра (на 3 попадания)
+        this.hp = 300; 
         this.maxHp = 300;
     }
 
@@ -46,7 +46,7 @@ export class Monster {
     draw() {
         let ctx = this.game.ctx;
         
-        // Рисуем самого монстра
+     
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.size, this.size);
         
@@ -55,7 +55,6 @@ export class Monster {
         ctx.fillStyle = '#FFFF00';
         ctx.fillRect(this.x + 14, this.y + 14, 4, 4);
 
-        // Полоска здоровья над головой монстра
         if (this.hp > 0) {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
             ctx.fillRect(this.x, this.y - 8, this.size, 4);

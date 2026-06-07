@@ -23,7 +23,7 @@ export class Tank {
 
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.size, this.size);
-        
+
         ctx.fillStyle = '#fff';
         let cx = this.x + this.size / 2;
         let cy = this.y + this.size / 2;
@@ -48,7 +48,7 @@ export class Tank {
 
         if (this.cooldown > 0) this.cooldown--;
         if (keys[this.controls.shoot] && this.cooldown === 0) {
-            this.game.bullets.push(new TankBullet(this.game, this.x + this.size/2, this.y + this.size/2, this.dx, this.dy, this.color));
+            this.game.bullets.push(new TankBullet(this.game, this.x + this.size / 2, this.y + this.size / 2, this.dx, this.dy, this.color));
             this.cooldown = 30;
         }
     }

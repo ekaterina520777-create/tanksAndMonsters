@@ -22,6 +22,7 @@
 .log-list::-webkit-scrollbar {
     width: 4px;
 }
+
 .log-list::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 2px;
@@ -44,7 +45,7 @@ body.light-theme .header {
     border-color: #e4e4e7 !important;
 }
 
-body.light-theme .setup-section, 
+body.light-theme .setup-section,
 body.light-theme .leaderboard-section {
     background-color: #ffffff !important;
     border: 1px solid #e4e4e7 !important;
@@ -81,7 +82,7 @@ body.light-theme kbd {
 }
 
 .mobile-joystick {
-    grid-template-areas: 
+    grid-template-areas:
         ".    up    ."
         "left shoot right"
         ".    down  .";
@@ -102,11 +103,25 @@ body.light-theme kbd {
     touch-action: none;
 }
 
-.btn-up { grid-area: up; }
-.btn-left { grid-area: left; }
-.btn-right { grid-area: right; }
-.btn-down { grid-area: down; }
-.btn-shoot { grid-area: shoot; }
+.btn-up {
+    grid-area: up;
+}
+
+.btn-left {
+    grid-area: left;
+}
+
+.btn-right {
+    grid-area: right;
+}
+
+.btn-down {
+    grid-area: down;
+}
+
+.btn-shoot {
+    grid-area: shoot;
+}
 
 #btnPause {
     touch-action: none;
@@ -118,6 +133,7 @@ body.light-theme kbd {
     .mobile-controls {
         display: block;
     }
+
     .main-container {
         padding: 0 5px;
     }

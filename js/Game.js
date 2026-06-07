@@ -6,9 +6,9 @@ export class Game {
     constructor(canvasId, leaderboardApp) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
-        this.tileSize = 40; 
-        
-        this.leaderboardApp = leaderboardApp; 
+        this.tileSize = 40;
+
+        this.leaderboardApp = leaderboardApp;
         this.map = [];
         this.keys = {};
         this.bullets = [];
@@ -25,8 +25,8 @@ export class Game {
     }
 
     initGlobalEvents() {
-        window.addEventListener('keydown', e => { 
-            this.keys[e.code] = true; 
+        window.addEventListener('keydown', e => {
+            this.keys[e.code] = true;
             if (e.code === 'KeyP' && this.isRunning) {
                 this.togglePause();
             }
@@ -82,20 +82,20 @@ export class Game {
     }
 
     hitTank(bullet, tank) {
-        return bullet.x > tank.x && bullet.x < tank.x + tank.size && 
-               bullet.y > tank.y && bullet.y < tank.y + tank.size;
+        return bullet.x > tank.x && bullet.x < tank.x + tank.size &&
+            bullet.y > tank.y && bullet.y < tank.y + tank.size;
     }
 
     hitMonster(bullet, monster) {
         return bullet.x > monster.x && bullet.x < monster.x + monster.size &&
-               bullet.y > monster.y && bullet.y < monster.y + monster.size;
+            bullet.y > monster.y && bullet.y < monster.y + monster.size;
     }
 
     checkBonusCollision(tank, bonus) {
         return tank.x < bonus.x + bonus.size &&
-               tank.x + tank.size > bonus.x &&
-               tank.y < bonus.y + bonus.size &&
-               tank.y + tank.size > bonus.y;
+            tank.x + tank.size > bonus.x &&
+            tank.y < bonus.y + bonus.size &&
+            tank.y + tank.size > bonus.y;
     }
 
     update() {
@@ -120,11 +120,11 @@ export class Game {
                     if (this.hitMonster(b, monster)) {
                         monster.hp -= b.damage;
                         b.active = false;
-                        
+
                         if (monster.hp <= 0) {
                             const bonusType = Math.random() < 0.5 ? 'life' : 'speed';
                             this.bonuses.push(new Bonus(this, monster.x, monster.y, bonusType));
-                            
+
                             this.monsters.splice(m, 1);
                         }
                         break;
@@ -174,7 +174,7 @@ export class Game {
                 if (bonus.type === 'life') {
                     this.p1.lives++;
                 } else if (bonus.type === 'speed') {
-                    this.p1.bulletSpeedMultiplier = 2.0; 
+                    this.p1.bulletSpeedMultiplier = 2.0;
                 }
                 this.bonuses.splice(i, 1);
                 continue;
@@ -197,11 +197,11 @@ export class Game {
         }
     }
 
-   render() {   
+    render() {
         this.ctx.textAlign = 'left';
 
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         if (!this.isRunning) {
             this.ctx.fillStyle = '#fff';
             this.ctx.font = '20px sans-serif';
