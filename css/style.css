@@ -1,25 +1,77 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #222;
-    color: #fff;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 20px;
+#gameCanvas {
+    background-color: #111113;
+    image-rendering: pixelated;
+    max-width: 100%;
+    height: auto;
 }
-canvas {
-    background-color: #111;
-    border: 4px solid #555;
-    box-shadow: 0 0 20px #111;
+
+
+.overlay {
+    z-index: 5;
+    letter-spacing: 6px;
+    transition: all 0.2s ease;
 }
-.controls {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 10px;
-    background: #333;
-    padding: 10px 20px;
-    border-radius: 8px;
+
+.overlay.hidden {
+    display: none !important;
 }
-.player1 { color: #4CAF50; }
-.player2 { color: #2196F3; }
+
+
+.log-list::-webkit-scrollbar {
+    width: 4px;
+}
+.log-list::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+
+.log-list li {
+    background: transparent !important;
+    padding: 8px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    font-family: monospace;
+    color: #a0a0aa !important;
+}
+
+
+body.light-theme {
+    background-color: #f4f5f6 !important;
+    color: #18181b !important;
+}
+
+body.light-theme .header {
+    border-color: #e4e4e7 !important;
+}
+
+body.light-theme .setup-section, 
+body.light-theme .leaderboard-section {
+    background-color: #ffffff !important;
+    border: 1px solid #e4e4e7 !important;
+}
+
+body.light-theme .input-field {
+    background-color: #f4f5f6 !important;
+    color: #18181b !important;
+    border-color: #d4d4d8 !important;
+}
+
+body.light-theme .btn--start {
+    background-color: #18181b !important;
+    color: #ffffff !important;
+}
+
+body.light-theme .log-list li {
+    border-bottom: 1px solid #e4e4e7 !important;
+    color: #4b5563 !important;
+}
+
+body.light-theme .log-list::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme kbd {
+    background-color: #e4e4e7 !important;
+    color: #18181b !important;
+    border: 1px solid #d4d4d8 !important;
+}
